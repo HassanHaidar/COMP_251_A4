@@ -59,17 +59,17 @@ public class Multiply{
     	else{
     		int m = (int)Math.ceil(size/2.0);	
     		
-    		int a = (int)Math.floor(x / Math.pow(2, m));
+    		int a = (int)Math.floor(x / (int)Math.pow(2, m));
     		int b = x % ((int)Math.pow(2, m));
     		
-    		int c = (int)Math.floor(y / Math.pow(2, m));
+    		int c = (int)Math.floor(y / (int)Math.pow(2, m));
     		int d = y % ((int)Math.pow(2, m));
     		
     		int[] e = karatsuba(m, a, c);
     		int[] f = karatsuba(m, b, d);
     		int[] g = karatsuba(m, a-b, c-d);
     		
-    		result[0] = (int) (Math.pow(2,2*m) * e[0] + Math.pow(2, m) * (e[0] + f[0] - g[0]) + f[0]);    	
+    		result[0] = (int) ((int)Math.pow(2,2*m) * e[0] + (int)Math.pow(2, m) * (e[0] + f[0] - g[0]) + f[0]);    	
     		result[1] = (e[1] + f[1] + g[1] + 6 * size);
     		
     		return result;
@@ -91,6 +91,9 @@ public class Multiply{
                     int y = randomInt(size);
                     int[] resNaive = naive(size,x,y);
                     int[] resKaratsuba = karatsuba(size,x,y);
+                    
+                //    System.out.println(" X : " +  x  +  " Y :  " +  y);
+                //    System.out.println(x * y);
             
                     if (resNaive[0] != resKaratsuba[0]) {
                         throw new Exception("Return values do not match! (x=" + x + "; y=" + y + "; Naive=" + resNaive[0] + "; Karatsuba=" + resKaratsuba[0] + ")");
